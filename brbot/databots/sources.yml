@@ -1,0 +1,14 @@
+forex:
+  intraday:
+    - USDBRL
+  daily:
+    - USDBRL
+
+b3:
+  daily:
+    - DI
+
+inflation:
+  monthly:
+    - IPCA
+    - IGPM

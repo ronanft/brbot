@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  rabbit:
+    hostname: rabbit
+    # Run run.sh in order to fill $DOCKER_USER, $VOL1 variables and create host dir for volumes
+    user: $DOCKER_USER
+    image: rabbitmq:alpine
+    container_name: rabbitmq
+    volumes:
+      - "../data/rabbitmq/data:/var/lib/rabbitmq"
+      - "../$VOL1/:/var/log/rabbitmq"
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    # depends_on:
+    #  - serviceName
+
+  timescale:
+    image: timescale/timescaledb:latest-pg14
+    container_name: timescaledb
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - "../data/timescale:/var/lib/postgresql/data"
+    restart: always
+    ports:
+      - 5432:5432
+    # depends_on:
+    #  - serviceName
